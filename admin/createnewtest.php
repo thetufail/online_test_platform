@@ -23,6 +23,7 @@ $a = array("answers"=>''
 
 if (isset($_GET['submit'])) {
     for ($i=1; $i<=10; $i++) {
+        $opt = array();
         if (isset($_GET['question'.$i.''])) {
             $q["question"] = $_GET['question'.$i.''];
             $a["answers"] = $_GET['answers'.$i.''];
@@ -30,33 +31,40 @@ if (isset($_GET['submit'])) {
             array_push($answers, $a["answers"]);
         }
         for ($j=1; $j<=4; $j++) {
-            $o["option"] = $_GET['option'.$j.''];
+            array_push($opt, $_GET['option'.$i.$j.'']);
         }
+        $o["option"] = $opt;
         array_push($options, $o["option"]);
+        
+        print_r($q)."<br><br><br>";
+        print_r($o)."<br><br><br>";
+        print_r($a)."<br><br><br>";
+    }
 
-        // print_r($q)."<br><br><br>";
-        // print_r($o)."<br><br><br>";
-        // print_r($a)."<br><br><br>";
+    if (!empty($questions)) {
+        $qdb = json_encode($questions);
+    }
+    if (!empty($options)) {
+        $odb = json_encode($options);
+    }
+    if (!empty($answers)) {
+        $adb = json_encode($answers);
+    }
+    
+    $sql = "INSERT INTO tests (`test_no`, `questions`, `options`,`answers`,`qualifying_marks`) 
+    VALUES('','".$qdb."','".$odb."','".$adb."',7)";
+
+    if ($conn->query($sql) === true) {
+        // header('Location: configdb.php');
     }
 }
 
+echo "<br><br><br><br><br>";
 print_r($questions);
 echo "<br><br><br><br><br>";
 print_r($options);
 echo "<br><br><br><br><br>";
 print_r($answers);
-
-
-
-
-
-
-
-
-
-
-
-
 
 display();
 
@@ -79,7 +87,7 @@ function display() {
         for ($j=1; $j<=4; $j++) {
             $html.='<tr>
                         <td>Option '.$j.'</td>
-                        <td><input type="text" name="option'.$j.'"></td>
+                        <td><input type="text" name="option'.$i.$j.'"></td>
                     </tr>';
         }
             $html.='</table>
@@ -88,7 +96,7 @@ function display() {
                     <table>';
         for ($k=1; $k<=4; $k++) {
             $html.='<tr>
-                        <td><input type="checkbox" name="answers'.$i.'[]" value="option'.$k.'"></td>
+                        <td><input type="checkbox" name="answers'.$i.'[]" value="'.$k.'"></td>
                     </tr>';
         }
             $html.='</table>
