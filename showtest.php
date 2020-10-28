@@ -1,10 +1,10 @@
 <?php
 
+session_start();
 include('admin/configdb.php');
 $number_of_page = 10;
 
-$sql = "SELECT * FROM tests WHERE test_no=".'16';
-$result = $conn->query($sql);
+echo $_SESSION["test"]."<BR>";
 
 if (!isset($_GET['page']) ) {  
     $page = 1;
@@ -13,6 +13,13 @@ if (!isset($_GET['page']) ) {
     $page = $_GET['page'];
     $x = $page -1;  
 }
+
+if ($page == '' || $page == 1) {
+    $_SESSION["ans"]=array();
+}
+
+$sql = "SELECT * FROM tests WHERE test_no=".$_SESSION["test"];
+$result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
@@ -25,12 +32,15 @@ if ($result->num_rows > 0) {
                 foreach ($options as $key => $value) {
                     if ($key == $x) {
                         $html='';
-                        $html.='<form method="GET">';
+                        $html.='<form method="POST">';
                         foreach ($value as $k => $v) {
                             $html.='<input type="checkbox" name="answers[]" value="'.($v).'">'.$v.'<br>';
                         }
                         $html.='<input type="submit" name="submit" value="Submit"></form>';
-                        $checkbox = $_GET['answers'];
+                        if (isset($_POST['submit']) && (!empty($_POST['answers']))) {
+                            $checkbox = $_POST['answers'];
+                            array_push($_SESSION["ans"], $checkbox);
+                        }
                         echo $html;
                         break;
                     }
@@ -56,10 +66,21 @@ if (isset($_GET['page']) ) {
     $prev=1;
     $next=2;
 }
-
-if (isset($_GET['submit']) ) {  
-    print_r($checkbox);
+// unset($_SESSION["ans"][8]);
+// unset($_SESSION["ans"][9]);
+// unset($_SESSION["ans"][10]);
+// unset($_SESSION["ans"][11]);
+// unset($_SESSION["ans"][12]);
+// unset($_SESSION["ans"][13]);
+// unset($_SESSION["ans"][14]);
+if (isset($_POST['submit']) && (!empty($checkbox))) {
+    // print_r($checkbox);
+    print_r($_SESSION["ans"]);
+    if (count($_SESSION["ans"]) == 10) {
+        header('Location: result.php');
+    }
 }
+
 
 $pages_list='';
 $pages_list.='<ul><li><a href="showtest.php?page='.$prev.'" >Previous</a></li>';
