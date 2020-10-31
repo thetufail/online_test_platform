@@ -2,6 +2,7 @@
 
 session_start();
 include('admin/configdb.php');
+global $html;
 if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" || $_SESSION["userdata"]["role"] == "Student")) {
 
     $sql = "SELECT * FROM tests WHERE test_no=".$_SESSION["test"];
@@ -30,37 +31,36 @@ if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" ||
                     // echo $v."<br>";
                 }
             }
-            echo "<br>Wrong Answers: ";
-            echo $wrong_answers;
-            echo "<br>Correct Answers: ";
-            $ccc = 10-$wrong_answers;
-            echo 10-$wrong_answers;
-            $status = $ccc > $row["qualifying_marks"] ? "PASSED" : "FAILED";
-            echo $status;
-
+            $correct_answers = 10-$wrong_answers;
+            $status = $correct_answers >= $row["qualifying_marks"] ? "successfully passed" : "failed";
+            $html ='';
+            $html.='<div class="result"><h2>You\'ve '.$status.' the test!</h2>
+            <h3>Wrong Answers: '.$wrong_answers.'</h3>
+            <h3>Correct Answers: '.$correct_answers.'</h3></div>';
+            unset($_SESSION["test"]);
+            unset($_SESSION["ans"]);
+            unset($_SESSION["userdata"]);
         }
     }
-    unset($_SESSION["test"]);
-    unset($_SESSION["ans"]);
-    unset($_SESSION["userdata"]);
-    print_r($_SESSION);
-    // unset($a[8]);
-    // unset($_SESSION["cartitems"]);
-    // unset($_SESSION["totalSum"]);
-    // unset($_SESSION["product_in_cart"]);
-    // unset($_SESSION["totalPriceOfAllProduct"]);
-    // unset($_SESSION["productInCart"]);
-    // unset($_SESSION["total"]);
+    // print_r($_SESSION);
     // unset($_SESSION["ans"]);
     // unset($_SESSION["test"]);
-    // foreach ($a as $key => $value) {
-
-    // }
 } else {
-    echo "<h1>ACCESS DENIED!</h1>";
-    // unset($_SESSION[""]);
-    // unset($_SESSION["c"]);
+    $html.='<h1>ACCESS DENIED!</h1>';
     print_r($_SESSION);
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="admin/style.css?t=1">
+</head>
+<body>
+    <?php echo $html; ?>
+</body>
+</html>

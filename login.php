@@ -16,7 +16,7 @@ if (isset($_POST['submit'])) {
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $_SESSION['userdata'] = array('username'=>$row['username'],'user_id'=>$row['user_id'],'role'=>$row['role']);
+                $_SESSION['userdata'] = array('username'=>$row['username'],'user_id'=>$row['user_id'],'role'=>$row['role'],'navigation'=>'');
                 header('Location: listalltests.php');
             }
         } else {
@@ -30,7 +30,7 @@ if (isset($_POST['submit'])) {
 
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $_SESSION['userdata'] = array('username'=>$row['username'],'user_id'=>$row['user_id'],'role'=>$row['role']);
+                $_SESSION['userdata'] = array('username'=>$row['username'],'user_id'=>$row['user_id'],'role'=>$row['role'],'navigation'=>'');
                 header('Location: listalltests.php');
             }
         } else {
@@ -48,21 +48,21 @@ if (isset($_POST['submit'])) {
     <title>
         Login
     </title>
-    <!-- <link href="style.css" type="text/css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="admin/style.css?t=1">
 </head>
 <body>
     <div id="wrapper">
         <div id="login-form">
-            <h2>Login</h2>
-            <form action="login.php" method="POST">
+            <h2>LOGIN</h2>
+            <form id="loginForm" action="login.php" method="POST">
                 <p>
-                    <label for="username">Username: <input type="text" name="username" required></label>
+                    <input class="signuploginformdetails" type="text" name="username" required placeholder="Username">
                 </p>
                 <p>
-                    <label for="password">Password: <input type="password" name="password" required></label>
+                    <input class="signuploginformdetails" type="password" name="password" required placeholder="Password">
                 </p>
                 <p>
-                    <input type="submit" name="submit" value="Submit">
+                    <input class="submitsignupform" type="submit" name="submit" value="SUBMIT">
                 </p>
             </form>
         </div>

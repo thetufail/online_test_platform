@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
     <title>
         Register
     </title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <link rel="stylesheet" type="text/css" href="admin/style.css?t=1">
 </head>
 <body>
     <div id="errors">
@@ -55,22 +55,22 @@ if (isset($_POST['submit'])) {
     </div>
     <div id="wrapper">
         <div id="signup-form">
-            <h2>Sign Up</h2>
-            <form action="signup.php" method="POST">
+            <h2>SIGN UP</h2>
+            <form id="signupForm" action="signup.php" method="POST">
                 <p>
-                    <label for="username">Username: <input type="text" name="username" required></label>
+                    <input class="signuploginformdetails" type="text" name="username" required placeholder="Username">
                 </p>
                 <p>
-                    <label for="password">Password: <input type="password" name="password" required></label>
+                    <input class="signuploginformdetails" type="password" name="password" required placeholder="Password">
                 </p>
                 <p>
-                    <label for="password2">Re-Password: <input type="password" name="password2" required></label>
+                    <input class="signuploginformdetails" type="password" name="password2" required placeholder="Confirm Password">
                 </p>
                 <p>
-                    <label for="email">Email: <input type="email" name="email" required></label>
+                    <input class="signuploginformdetails" type="email" name="email" required placeholder="Email">
                 </p>
                 <p>
-                    <input type="submit" name="submit" value="Submit">
+                    <input class="submitsignupform" type="submit" name="submit" value="SUBMIT">
                 </p>
             </form>
         </div>

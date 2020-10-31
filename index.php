@@ -4,20 +4,19 @@
     <title>
         Register
     </title>
-    <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+    <link rel="stylesheet" type="text/css" href="admin/style.css?t=1">
 </head>
 <body>
-<h2>Welcome to Online Test Platform</h2>
+<h1 class="welcome">WELCOME TO ONLINE TEST PLATFORM</h1>
     <div id="wrapper">
         <p>
-            <!-- <input type="submit" name="signup" value="SignUp"> -->
-            <a href="signup.php">Sign Up</a>
+            <a class="signup" href="signup.php">SIGN UP</a>
         </p>
-        <p>or</p>
+        <p class="or">or</p>
         <p>
-            <!-- <input type="submit" name="login" value="Login"> -->
-            <a href="login.php">Login</a>
+            <a class="login" href="login.php">LOGIN</a>
         </p>
     </div>
+    <!-- <footer>For testing purpose: Username- Admin, Password- 0000</footer> -->
 </body>
 </html>

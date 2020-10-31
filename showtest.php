@@ -4,11 +4,7 @@ session_start();
 include('admin/configdb.php');
 
 if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" || $_SESSION["userdata"]["role"] == "Student")) {
-
     $number_of_page = 10;
-
-    echo $_SESSION["test"]."<BR>";
-
     if (!isset($_GET['page']) ) {  
         $page = 1;
         $x = $page-1;  
@@ -26,20 +22,20 @@ if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" ||
 
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
+            $_SESSION['userdata']['navigation'] = $row["navigation"];
             $questions = json_decode($row["questions"], true);
             $options = json_decode($row["options"], true);
             foreach ($questions as $no => $question) {
                 if ($no == $x) {
-                    echo $page.")".$question."<br>";
-                    echo "<br>OPTIONS<br>";
+                    $html='';
+                    $html.='<div class="testformat"><div class="question">'.$page.'. '.htmlspecialchars($question).'</div><p>Select the correct option(s)</p><div class="options">';
                     foreach ($options as $key => $value) {
                         if ($key == $x) {
-                            $html='';
                             $html.='<form method="POST">';
                             foreach ($value as $k => $v) {
-                                $html.='<input type="checkbox" name="answers[]" value="'.($v).'">'.$v.'<br>';
+                                $html.='<div class="option"><span class="optionno">'.htmlspecialchars($v).'</span><input class="opt" type="checkbox" name="answers[]" value="'.($k+1).'"></div>';
                             }
-                            $html.='<input type="submit" name="submit" value="Submit"></form>';
+                            $html.='</div><input class="submitanswer" type="submit" name="submit" value="SUBMIT"></form>';
                             if (isset($_POST['submit']) && (!empty($_POST['answers']))) {
                                 $checkbox = $_POST['answers'];
                                 array_push($_SESSION["ans"], $checkbox);
@@ -76,14 +72,15 @@ if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" ||
     // unset($_SESSION["ans"][12]);
     // unset($_SESSION["ans"][13]);
     // unset($_SESSION["ans"][14]);
-    if (isset($_POST['submit']) && (!empty($checkbox))) {
+    if (isset($_POST['submit']) && (!empty($checkbox)) && $_SESSION['userdata']['navigation'] == -1) {
         // print_r($_SESSION["ans"]);
         $pages_list='';
-        $pages_list.='<a href="showtest.php?page='.$next.'" >Next</a>';
+        $pages_list.='<a class="nextaftersubmit" href="showtest.php?page='.$next.'" >NEXT</a>';
         echo $pages_list;
-        if (count($_SESSION["ans"]) == 10) {
-            header('Location: result.php');
-        }
+    }
+
+    if (count($_SESSION["ans"]) == 10) {
+        header('Location: result.php');
     }
 
     $result = $conn->query($sql);
@@ -91,8 +88,9 @@ if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" ||
         while ($row = $result->fetch_assoc()) {
             if ($row["navigation"] == 1) {
                 $pages_list='';
-                $pages_list.='<ul><li><a href="showtest.php?page='.$prev.'" >Previous</a></li>';
-                $pages_list.='<li><a href="showtest.php?page='.$next.'" >Next</a></li></ul>';
+                $pages_list.='<div id="nav"><a class="prev" href="showtest.php?page='.$prev.'" >PREVIOUS</a>';
+                $pages_list.='<a class="next" href="showtest.php?page='.$next.'" >NEXT</a></div>
+                </div>';
                 echo $pages_list;
             }
         }
@@ -100,14 +98,17 @@ if (isset($_SESSION["userdata"]) && ($_SESSION["userdata"]["role"] == "Admin" ||
 } else {
     echo "<h1>ACCESS DENIED!</h1>";
 }
+
 ?>
 
-<!-- 
-// echo "ANSWERS<bR>";
-            // $answers = json_decode($row["answers"], true);
-            // foreach ($answers as $key => $value) {
-            //     foreach ($value as $k => $v) {
-            //         echo $v."<br>";
-            //     }
-            //     echo "<br>";
-            // } -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="admin/style.css?t=1">
+</head>
+<body>
+</body>
+</html>
