@@ -1,0 +1,263 @@
+body {
+    /* font-size: 1.25rem; */
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* index.php */
+
+.welcome {
+    display: block;
+    text-align: center;
+    word-spacing: 2px;
+}
+
+#wrapper {
+    background-color: #ffffff;
+    text-align: center;
+    width: 25%;
+    margin: auto;
+    margin-top: 6%;
+    padding: 40px 20px;
+    border-radius: 4px;
+    box-shadow: 4px -6px 10px 0px grey;
+
+}
+
+.signup {
+    display: block;
+    padding: 12px 60px;
+    border: 1px solid #ff4136;
+    width: 40%;
+    color: black;
+    border-radius: 3px;
+    margin: auto;
+}
+
+.login {
+    display: block;
+    padding: 12px 60px;
+    border: 1px solid #0074d9;
+    width: 40%;
+    color: black;
+    border-radius: 3px;
+    margin: auto;
+}
+
+a.signup:hover {
+    background-color: #ff4136;
+    color: #ffffff;
+}
+
+a.login:hover {
+    background-color: #0074d9;
+    color: #ffffff;
+}
+
+.or {
+    display: block;m;
+}
+
+/* signup.php and login.php */
+
+#signupForm {
+    
+}
+
+.signuploginformdetails {
+    display: block;
+    margin: auto;
+    width: 75%;
+    height: 24px;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #0074d9;
+    padding: 4px 0px;
+}
+
+.submitsignupform {
+    display: block;
+    margin: auto;
+    width: 75%;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #2ecc40;
+    padding: 8px 0px;
+    background-color: #ffffff;
+}
+
+.submitsignupform:hover, .submitanswer:hover, .testcreated:hover {
+    background-color: #2ecc40;
+    color: #ffffff;
+}
+
+/* listalltests.php */
+
+.tests {
+    display: inline-block;
+    width: 16%;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #0074d9;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    margin: 8px 4px;
+}
+
+.tests:hover, .next:hover, .nextaftersubmit:hover {
+    background-color: #0074d9;
+    color: #ffffff;
+}
+
+.addnewtests {
+    display: inline-block;
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
+    border: 1px solid #ff4136;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    margin: 8px 0px;
+}
+
+.addnewtests:hover, .prev:hover {
+    background-color: #ff4136;
+    color: #ffffff;
+}
+
+/* showtest.php */
+
+.testformat {
+    width: 40%;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding: 3% 32 5% 32;
+    box-shadow: 4px -6px 10px 2px grey;
+    border-radius: 3px;
+}
+
+.question {
+    display: block;
+    background-color: #efefef;
+    padding: 10px 10px;
+    height: 24%;
+    border-radius: 4px;
+}
+
+.option {
+    display: block;
+    background-color: #efefef;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.opt {
+    width: 30px;
+    height: 30px;
+    float: right;
+}
+
+.optionno {
+    margin-left: 6px;
+}
+
+
+.submitanswer {
+    display: block;
+    width: 21%;
+    border-radius: 3px;
+    border: 1px solid #2ecc40;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    float: left;
+}
+
+#nav {
+    float: right;
+    overflow: hidden;
+    width: 42%;
+    display: block;
+}
+
+.nextaftersubmit {
+    display: block;
+    width: 20%;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #0074d9;
+    padding: 8px 0px;
+    background-color: #ffffff;
+    float: right;
+    color: black;
+}
+
+.prev {
+    display: block;
+    width: 48%;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #ff4136;
+    padding: 8px 0px;
+    background-color: #ffffff;
+    float: left;
+    color: black;
+}
+
+.next {
+    display: block;
+    width: 48%;
+    text-align: center;
+    border-radius: 3px;
+    border: 1px solid #0074d9;
+    padding: 8px 0px;
+    background-color: #ffffff;
+    float: right;
+    color: black;
+}
+
+/* result.php */
+
+.result {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    box-shadow: 4px -6px 10px 2px grey;
+    padding: 20px 0px;
+    border-radius: 3px;
+    margin-top: 10%;
+}
+
+/* createnewtest.php */
+
+#t01 th, #t01 td {
+    padding: 6px 6px;
+}
+
+#t01 th {
+    font-size: 1.25rem;
+}
+
+.t01chk {
+    width: 15px;
+    height: 15px;
+}
+
+#createtest {
+    margin: 4% 0%;
+}
+
+.testcreated {
+    display: block;
+    width: 20%;
+    border-radius: 3px;
+    border: 1px solid #2ecc40;
+    padding: 10px 0px;
+    background-color: #ffffff;
+    float: left;
+}
